@@ -6,10 +6,11 @@ import lombok.Data;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
-@Table(name="produit")
+@Table(name="projet")
 public class Project implements Serializable {
     private static final long serialVersionUID = 1L; // Vous pouvez générer un UID spécifique
 
@@ -36,4 +37,10 @@ public class Project implements Serializable {
     @Column(name = "files")
     private String files ;
 
+
+    @ManyToOne
+    Client client;
+
+    @ManyToMany(mappedBy="projects", cascade = CascadeType.ALL)
+    private Set<Employes> employes;
 }

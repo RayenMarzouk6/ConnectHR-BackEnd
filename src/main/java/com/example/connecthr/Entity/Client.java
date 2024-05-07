@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Data
@@ -29,5 +30,7 @@ public class Client implements Serializable {
     @Column(name="image")
     private String image;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="client")
+    private Set<Project> Projects;
 
 }

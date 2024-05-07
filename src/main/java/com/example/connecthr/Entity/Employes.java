@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -34,6 +35,9 @@ public class Employes implements Serializable {
     @CollectionTable(name = "EmployeeSkills", joinColumns = @JoinColumn(name = "employee_id")) // Indique le nom de la table où ces éléments seront stockés. Ici, "EmployeeSkills" est le nom de la table, et elle sera liée à l'entité "Employee" par la colonne "employee_id".
     @Column(name = "skill")
     private List<String> skills;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<Project> projects;
 
 
 }
