@@ -21,8 +21,8 @@ public class Client implements Serializable {
     @Column(name="name")
     private String name;
 
-    @Column(name="email")
-    private Integer number;
+    @Column(name = "email")
+    private String email;
 
     @Column(name="address")
     private String address;
@@ -31,6 +31,6 @@ public class Client implements Serializable {
     private String image;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy="client")
-    private Set<Project> Projects;
+    private Set<Project> projects;
 
 }

@@ -38,9 +38,10 @@ public class Project implements Serializable {
     private String files ;
 
 
-    @ManyToOne
-    Client client;
+    @ManyToOne // Un projet est lié à un seul client
+    @JoinColumn(name = "client_id") // Crée une jointure basée sur 'client_id'
+    private Client client; // Relation avec 'Client'
 
     @ManyToMany(mappedBy="projects", cascade = CascadeType.ALL)
-    private Set<Employes> employes;
+    private Set<Employes> employee;
 }
