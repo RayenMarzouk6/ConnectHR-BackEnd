@@ -1,4 +1,4 @@
-package com.example.connecthr.controller;
+package com.example.connecthr.Controller;
 
 
 import com.example.connecthr.Entity.Client;
@@ -11,30 +11,30 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+@RestController
 @RequestMapping("/api/clients") // Base URL for client-related operations
 public class ClientController {
 
     @Autowired
     private ClientRepository clientRepository;
 
-    @GetMapping
+    @GetMapping("/getAll")
     public List<Client> getAllClients() {
         return clientRepository.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("get/{id}")
     public ResponseEntity<Client> getClientById(@PathVariable Integer id) {
         Optional<Client> client = clientRepository.findById(id);
         return client.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public Client createClient(@RequestBody Client client) {
         return clientRepository.save(client);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("update/{id}")
     public ResponseEntity<Client> updateClient(@PathVariable Integer id, @RequestBody Client updatedClient) {
         if (!clientRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
@@ -44,7 +44,7 @@ public class ClientController {
         return ResponseEntity.ok(savedClient);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("delete/{id}")
     public ResponseEntity<Void> deleteClient(@PathVariable Integer id) {
         if (!clientRepository.existsById(id)) {
             return ResponseEntity.notFound().build();

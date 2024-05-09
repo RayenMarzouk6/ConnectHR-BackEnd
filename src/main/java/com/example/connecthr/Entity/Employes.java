@@ -2,7 +2,9 @@ package com.example.connecthr.Entity;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.List;
@@ -10,6 +12,8 @@ import java.util.Set;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name="Employee")
 public class Employes implements Serializable {
     private static final long serialVersionUID = 1L; // Vous pouvez générer un UID spécifique

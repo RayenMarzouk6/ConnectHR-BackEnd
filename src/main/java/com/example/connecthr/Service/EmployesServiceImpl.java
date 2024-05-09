@@ -2,6 +2,7 @@ package com.example.connecthr.Service;
 
 import com.example.connecthr.Entity.Employes;
 import com.example.connecthr.Repository.EmployesRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class EmployesServiceImpl implements IEmployesService {
     @Autowired
     private EmployesRepository employesRepository;
