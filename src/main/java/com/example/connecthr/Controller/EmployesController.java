@@ -19,23 +19,23 @@ public class EmployesController {
     @Autowired
     private EmployesRepository employesRepository;
 
-    @GetMapping
+    @GetMapping("/getAllEmployees")
     public List<Employes> getAllEmployees() {
         return employesRepository.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<Employes> getEmployeeById(@PathVariable Integer id) {
         Optional<Employes> employee = employesRepository.findById(id);
         return employee.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public Employes createEmployee(@RequestBody Employes employee) {
         return employesRepository.save(employee);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Employes> updateEmployee(@PathVariable Integer id, @RequestBody Employes updatedEmployee) {
         if (!employesRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
@@ -45,7 +45,7 @@ public class EmployesController {
         return ResponseEntity.ok(savedEmployee);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteEmployee(@PathVariable Integer id) {
         // Corrected typo and added necessary brackets
         if (!employesRepository.existsById(id)) {

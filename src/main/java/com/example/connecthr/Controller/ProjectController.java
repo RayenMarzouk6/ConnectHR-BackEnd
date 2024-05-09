@@ -17,23 +17,23 @@ public class ProjectController {
     @Autowired
     private ProjectRepository projectRepository;
 
-    @GetMapping
+    @GetMapping("/getAllProjects")
     public List<Project> getAllProjects() {
         return projectRepository.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<Project> getProjectById(@PathVariable Integer id) {
         Optional<Project> project = projectRepository.findById(id);
         return project.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build()); // Fixed 'or else'
     }
 
-    @PostMapping
+    @PostMapping("/addProject")
     public Project createProject(@RequestBody Project project) {
         return projectRepository.save(project);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Project> updateProject(@PathVariable Integer id, @RequestBody Project updatedProject) {
         if (!projectRepository.existsById(id)) {
             return ResponseEntity.notFound().build(); // Corrected syntax with parentheses
@@ -43,7 +43,7 @@ public class ProjectController {
         return ResponseEntity.ok(savedProject); // Return the updated project
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteProject(@PathVariable Integer id) {
         if (!projectRepository.existsById(id)) {
             return ResponseEntity.notFound().build(); // Corrected parentheses and if-statement
