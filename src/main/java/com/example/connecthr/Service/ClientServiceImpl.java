@@ -13,7 +13,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class ClientServiceImpl implements IClientService{
     @Autowired
-    private ClientRepository clientRepository;
+    private ClientRepository clientRepository; // = new ClientRepository
 
     @Override
     public List<Client> getAllClients() {

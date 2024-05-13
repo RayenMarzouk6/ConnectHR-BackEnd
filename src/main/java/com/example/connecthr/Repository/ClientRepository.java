@@ -25,4 +25,7 @@ public interface ClientRepository extends JpaRepository<Client, Integer> {
     @Query("SELECT DISTINCT c FROM Client c JOIN c.projects p") // Utilisez JOIN pour vérifier s'il y a des projets
     List<Client> findClientsWithProjects();
 
+
+    //Image
+  //  List<Client> findByOrderById() ;
 }

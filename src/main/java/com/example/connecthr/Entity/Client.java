@@ -2,15 +2,15 @@ package com.example.connecthr.Entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="Client")
@@ -31,8 +31,13 @@ public class Client implements Serializable {
     @Column(name="address")
     private String address;
 
-    @Column(name="image")
-    private String image;
+   //    @Column(name="image")
+    //private String image;
+
+    @Column(name="image", columnDefinition = "BLOB")
+    private byte[] image;
+
+
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy="client")
     private Set<Project> projects;

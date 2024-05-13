@@ -7,12 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+
 @RestController
 @RequestMapping("/api/clients") // Base URL for client-related operations
+@CrossOrigin(origins = "http://localhost:4200")
 public class ClientController {
 
     @Autowired
@@ -31,6 +35,17 @@ public class ClientController {
 
     @PostMapping("/create")
     public Client createClient(@RequestBody Client client) {
+        return clientRepository.save(client);
+    }
+
+
+    @PostMapping("/createe")
+    public Client createClient(@RequestParam("file") MultipartFile file, @RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("address") String address) throws IOException {
+        Client client = new Client();
+        client.setName(name);
+        client.setEmail(email);
+        client.setAddress(address);
+        client.setImage(file.getBytes()); // Convertir l'image en tableau d'octets
         return clientRepository.save(client);
     }
 
